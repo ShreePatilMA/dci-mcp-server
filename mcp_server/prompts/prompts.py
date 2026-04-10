@@ -692,6 +692,93 @@ Do not hesitate to download any extra files from the "Other files" or "Supportin
 {_RCA_METHODOLOGY}{jira_instruction}"""
 
     @mcp.prompt()
+    async def eda(
+        jira_ticket_key: Annotated[
+            str,
+            "Jira issue key (e.g. ECOENGCL-446) for EcoSystem Engineering Close Loop / EDA work.",
+        ],
+    ) -> str:
+        """
+        Prompt for a Jira-based RCA/EDA write-up for a Closed Loop ticket (not a DCI job).
+
+        Returns:
+            Instructions to produce `/tmp/dci/rca-eda-<KEY>.md` aligned with Escape Defect Analysis fields.
+        """
+        return f"""Produce an **RCA/EDA report** for Jira ticket **{jira_ticket_key}** (EcoSystem Engineering Close Loop or similar). This is **not** a DCI job RCA — do not use `rca`/`rca-<job id>.md`; use the filename below.
+
+## Output
+
+- Create **`/tmp/dci/rca-eda-{jira_ticket_key}.md`** (directory `/tmp/dci` may already exist on the server from other work).
+- Use clear markdown with a title like: `# RCA/EDA Report — {jira_ticket_key}`
+
+## Step 1: Gather issue data
+
+- Use **`get_jira_ticket`** for `{jira_ticket_key}` and pull description, components, status, assignee, reporter, links (bugs, upstream), and **custom fields** used for EDA where available (e.g. Escape Reason, Escape Impact, Corrective Measures, SDLC stages — often `customfield_*` ids such as `customfield_10994` for Corrective Measures).
+- Use **`search_jira_tickets`** or comments if you need related context; prefer authoritative Jira text over guesses.
+
+## Step 2: Draft these sections (match common on-server examples)
+
+1. **Ticket Information** — Key, summary, status, people, components, QA contact if present, linked bugs/upstreams with working links (`https://redhat.atlassian.net/browse/{jira_ticket_key}` for this ticket; `https://issues.redhat.com/browse/...` for OCPBUGS-style keys when applicable).
+2. **Problem Summary** — What failed from the customer/field perspective; bullet notable log lines or behaviors if described in Jira.
+3. **Root Cause Analysis** — Causal explanation (numbered sub-steps are fine); cite Jira/description/comments, not invented logs unless provided.
+4. **Fix Details** — Upstream/OCPBUGS state, code or design changes, backports if stated.
+5. **EDA Fields** — A markdown table:
+
+| Field | Value |
+|-------|-------|
+| Escape Reason | … |
+| Escape Impact | … |
+| Corrective Measures | … |
+| Stage Introduced / Found / Should Have Been Found | … |
+| Test Coverage | … (if applicable) |
+
+Fill rows from Jira when the fields exist; use "—" or "Not stated in ticket" when missing.
+
+## Step 3: Quality checks
+
+- Keep partner/customer names and sensitive identifiers only as they appear on the ticket; do not invent names.
+- If Corrective Measures or other multi-select values are opaque from the API, say so briefly or paste human-readable values from the Jira UI if you have them.
+"""
+
+    @mcp.prompt()
+    async def review_queue(
+        notes: Annotated[
+            str,
+            "Optional: e.g. a component name, or 'OCP only' / 'RHEL only' to narrow narrative focus.",
+        ] = "",
+    ) -> str:
+        """
+        Prompt to refresh or work with the EcoSystem Engineering Close Loop Review backlog CSV.
+
+        Returns:
+            Instructions tied to `reports/review-queue-corrective-component-ocp-rhel.csv` and the fill script.
+        """
+        extra = f"\n\n**User focus:** {notes}\n" if notes.strip() else ""
+        return f"""Help maintain the **Review** backlog spreadsheet for **EcoSystem Engineering Close Loop** Closed Loop issues in **Review** status.{extra}
+## Artifacts (repo)
+
+- **`reports/review-queue-corrective-component-ocp-rhel.csv`** — columns include `key`, **`partner_or_customer`** (paste or fill from Jira), `corrective_measures_paste_from_jira`, `jira_component`, `ocp_rhel_category`, `summary`.
+- **`reports/closed-loop-review-report.md`** — JQL, Corrective Measures routing guidance, and a human-readable table mirroring the CSV.
+
+## Refresh from Jira
+
+From the repository root (with `JIRA_URL`, `JIRA_EMAIL`, `JIRA_API_TOKEN` in `.env`):
+
+```bash
+uv run python scripts/fill_review_queue_corrective_measures.py
+```
+
+- Optionally set **`JIRA_PARTNER_CUSTOM_FIELD`** (e.g. `customfield_12345`) in `.env` so **`partner_or_customer`** is populated when the API returns readable values.
+- If **Corrective Measures** stay empty from the API, paste labels from the Jira issue screen into the CSV (same as documented in the report).
+
+## JQL (reference)
+
+`project = "EcoSystem Engineering Close Loop" AND type = "Closed Loop" AND status = Review AND ...` — use the saved filter / full JQL from **`reports/closed-loop-review-report.md`** for the exact resolution and date clauses.
+
+When answering, prefer updating the CSV and report paths above over inventing new filenames unless the user asks otherwise.
+"""
+
+    @mcp.prompt()
     async def weekly(
         subject: Annotated[
             str, "The subject of the analysis (team name or id, remoteci name or id)."
