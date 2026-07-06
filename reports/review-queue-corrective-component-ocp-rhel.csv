@@ -1,0 +1,43 @@
+key,partner_or_customer,corrective_measures_paste_from_jira,jira_component,ocp_rhel_category,summary
+ECOENGCL-452,,,kernel / Networking / NIC Drivers,RHEL,MR rhel-9/-/merge_requests/5470 introduces a breaking API change
+ECOENGCL-451,,,—,OCP,BMO cannot abort inspection when deletion is requested
+ECOENGCL-450,,,Installer / Assisted installer,OCP,In SNO clusters MCC cannot take the lease after the node is rebooted
+ECOENGCL-449,,,oauth-apiserver,OCP,apiserver-library-go shall be updated to include more safed sysctl to reflect upstream changes
+ECOENGCL-448,,,kernel / Networking / NIC Drivers,RHEL,Embedded NIC interface name inconsistent on HPE DL110 gen12 (GNR-D) after BIOS upgrade [rhel-9.7.z]
+ECOENGCL-447,,,odf--4.18,OCP,ODF installation constantly fails with Assisted Installer
+ECOENGCL-446,,,Telco,OCP,[CLOSED LOOP for] [release-4.11] [AWS EFS] NFS mount disconnects and becomes unavailable.
+ECOENGCL-443,,,ACM,OCP,ACM 2.15.0: Worker node scale-in fails: BareMetalHost stuck in deleting due to Ironic cleaning error: missing uefi_esp.img
+ECOENGCL-442,,,—,OCP,Not able to trigger AlertmanagerFailedToSendAlerts with webhook-configuration
+ECOENGCL-441,,,LCA operator,OCP,openshift-lifecycle-agent ServiceMonitor triggers PrometheusOperatorRejectedResources alert
+ECOENGCL-440,,,Telco Edge / ZTP,OCP,Disabling chrony according to RDS leads to problems with chrony-wait.service
+ECOENGCL-437,,,Telco,OCP,[CLOSED LOOP for] [Verizon] Apparent race condition between ovs-configuration and bonding
+ECOENGCL-436,,,Telco,OCP,[CLOSED LOOP for] [ACM] ACM cannot access ironic-python-agent on dual-stack environment but only IPv6 is unreachable
+ECOENGCL-435,,,ACM,OCP,BareMetalHost deletion stuck due to Foreground deletion policy deadlock with PreprovisioningImage
+ECOENGCL-434,,,—,OCP,whereabouts-token-watcher does not renew the kubeconfig token
+ECOENGCL-433,,,Telco,OCP,[CLOSED LOOP for] Egress IP assigned to a secondary interface is also being incorrectly applied to the br-ex bridge
+ECOENGCL-432,,,Telco,OCP,[CLOSED LOOP for] Whereabouts: Duplicate IPs allocated in OCP 4.16 (similar to OCPBUGS-58405)
+ECOENGCL-431,,,Telco,RHEL,[CLOSED LOOP for] kernel: BUG: Bad page state in process
+ECOENGCL-430,,,ACM,OCP,ClusterInstance detach via GitOps leaves observability addons on managedcluster
+ECOENGCL-426,,,Networking / multus,OCP,<4.16>Whereabouts kubeconfig known to expire
+ECOENGCL-425,,,Telco,OCP,[CLOSED LOOP for] During installation of a Multi node cluster with a disconnected ACM hub cluster some machines fail to automatically reboot after OS installation.
+ECOENGCL-424,,,kernel / Networking / NIC Drivers,RHEL,[RHEL-9.4.z] FW logging backport from RHEL-17486
+ECOENGCL-417,,,ACM,OCP,"Allow ClusterInstance spec updates (e.g., rootDeviceHints) during cluster provisioning in ACM ZTP"
+ECOENGCL-416,,,kernel / Networking / NIC Drivers,RHEL,"[GNR-D, ice] phc2sys won't run: ioctl PTP_SYS_OFFSET_PRECISE: Value too large"
+ECOENGCL-415,,,kernel / Networking / NIC Drivers,RHEL,ice: Implement PTP support for E830 devices
+ECOENGCL-414,,,kernel / Networking / NIC Drivers,RHEL,ice: TSPLL patches [rhel-9.6.z]
+ECOENGCL-411,,,Telco,OCP,[CLOSED LOOP for] [4.18] In-memory certificate expiration date for apiservers is too short for ELS term 2
+ECOENGCL-409,,,Telco,OCP,[CLOSED LOOP For]RW hostPath mount in kube-rbac-proxy-crio static pod violates best practices in RHOCP4-OCPBUGS-55234 
+ECOENGCL-408,,,Telco,OCP,[CLOSED LOOP For] RW hostPath mount in lifecycle-agent-controller-manager pod violates best practices in RHOCP4 - OCPBUGS-55363
+ECOENGCL-407,,,Telco,OCP,[CLOSED LOOP for] Referencing pod named ports within a service results in bad DNAT rules containing tcp/0 target port.
+ECOENGCL-405,,,Node / CRI-O,OCP,OCP 4.16 cpu scheduling gets delayed
+ECOENGCL-403,,,kernel / File Systems / CephFS,RHEL,[BZ#2332081] [GSS] Moving a file deadlocked the MDS and crippled the entire CephFS subsystem - It's happened twice [rhel-9.4.z]
+ECOENGCL-394,,,Networking / multus,OCP,[release-4.19] k8s.v1.cni.cncf.io/network-status annotation is missing interface details for host-devices bound to the vfio-pci driver.
+ECOENGCL-385,,,Telco,OCP,[CLOSED LOOP for] Application pod is sending packet to incorrect/unexpected SPK TMM pod
+ECOENGCL-369,,,Node / Numa aware Scheduling,OCP,cri-o cannot pull image with certain characteristics
+ECOENGCL-366,,,qemu-kvm / Live Migration,RHEL,Investigate Live Migration potential improvements
+ECOENGCL-340,,,"CephFS, filesystems,, kernel / Networking",RHEL,Ceph: [9.2.z panic] kernel BUG at fs/ceph/addr.c:97! - Remove the incorrect Fw reference check when dirtying pages [rhel-9.2.0.z]
+ECOENGCL-328,,,—,RHEL,MDS crashed - need help analyzing coredump
+ECOENGCL-326,,,ACM,OCP,BareMetalHost CR fails to delete on cluster cleanup
+ECOENGCL-325,,,—,OCP,rook-ceph-osd-prepare-ocs-deviceset pods produce duplicate metrics
+ECOENGCL-299,,,—,RHEL,Delay between the WPC NIC card firmware and the driver for updating the physical clock from the GNSS.
+ECOENGCL-270,,,Telco,OCP,[CLOSED LOOP for] pods that are HostNetworked on nodes using routingViaHost:true ipForwarding: global cannot route to default kubernetes service IP
